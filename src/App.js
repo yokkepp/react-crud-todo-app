@@ -26,6 +26,11 @@ export default function App() {
 		}
 	};
 
+	const handleDeleteClick = (id) => {
+		const newArray = todos.filter((todo) => todo.id !== id);
+		setTodos(newArray);
+	};
+
 	useEffect(() => {
 		localStorage.setItem("todos", JSON.stringify(todos));
 	}, [todos]);
@@ -42,7 +47,10 @@ export default function App() {
 			</form>
 			<ul>
 				{todos.map((todo) => (
-					<li key={todo.id}>{todo.title}</li>
+					<li key={todo.id}>
+						{todo.title}
+						<button onClick={() => handleDeleteClick(todo.id)}>削除</button>
+					</li>
 				))}
 			</ul>
 		</div>
